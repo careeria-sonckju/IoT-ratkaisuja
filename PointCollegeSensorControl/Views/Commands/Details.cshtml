@@ -1,0 +1,42 @@
+﻿@model CareeriaIOTSensorControl.Models.Commands
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Commands</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeviceId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeviceId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Command)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Command)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Executed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Executed)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Command }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
