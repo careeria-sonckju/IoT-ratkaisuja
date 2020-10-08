@@ -231,7 +231,7 @@
     <Content Include="Models\IotDataModel.edmx.diagram">
       <DependentUpon>IotDataModel.edmx</DependentUpon>
     </Content>
-    <None Include="Properties\PublishProfiles\PointCollegeSQLWebAppIOT - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\careeriawebappiot - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

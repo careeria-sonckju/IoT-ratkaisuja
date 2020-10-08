@@ -21,8 +21,11 @@ namespace CareeriaIOTSensorControl.Controllers
             measurements m = new measurements();
             m.sender = id;
             CultureInfo en = new CultureInfo("en-US");
+            DateTime localDate = DateTime.Now;
+
             m.value = double.Parse(temp, en);
-            m.time = DateTime.Now;
+            //m.time = DateTime.UtcNow(-2);
+            m.time = localDate;
             m.type = 1;
             db.measurements.Add(m);
             db.SaveChanges();
