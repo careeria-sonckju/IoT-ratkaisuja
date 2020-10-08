@@ -256,6 +256,9 @@ ServiceFabricBackup/
 *.ldf
 *.ndf
 
+# Webconfig-file which contains passwords etc.
+Web.config
+
 # Business Intelligence projects
 *.rdl.data
 *.bim.layout
