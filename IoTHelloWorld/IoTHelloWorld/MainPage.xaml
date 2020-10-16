@@ -1,0 +1,17 @@
+﻿<Page
+    x:Class="IoTHelloWorld.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:IoTHelloWorld"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Button Margin="50,50,0,0" x:Name="BtnHello" Content="TERVE!" VerticalAlignment="Top" Height="75" Width="308" FontSize="20" Click="BtnHello_Click"/>
+        <TextBlock Margin="150,150,0,0" x:Name="message"></TextBlock>
+        <Button Margin="393,50,0,0" x:Name="BtnSulje" Content="Sulje" VerticalAlignment="Top" Height="75" Width="308" FontSize="20" Click="BtnSulje_Click"/>
+
+    </Grid>
+</Page>
