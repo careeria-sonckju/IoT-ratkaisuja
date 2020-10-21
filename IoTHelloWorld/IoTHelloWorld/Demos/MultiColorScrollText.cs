@@ -27,6 +27,7 @@ using Windows.UI;
 using Emmellsoft.IoT.Rpi.SenseHat;
 using Emmellsoft.IoT.Rpi.SenseHat.Fonts;
 using Emmellsoft.IoT.Rpi.SenseHat.Fonts.MultiColor;
+using IoTHelloWorld;
 
 namespace RPi.SenseHat.Demo.Demos
 {

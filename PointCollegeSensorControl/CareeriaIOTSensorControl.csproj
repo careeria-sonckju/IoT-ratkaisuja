@@ -222,6 +222,7 @@
       <DependentUpon>IotDataModel.edmx</DependentUpon>
       <LastGenOutput>IotDataModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Python\temper_azure_pyhton.py" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\IotDataModel.edmx">

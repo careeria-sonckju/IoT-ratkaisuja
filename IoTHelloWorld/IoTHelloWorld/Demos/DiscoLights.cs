@@ -24,6 +24,7 @@
 using System;
 using Windows.UI;
 using Emmellsoft.IoT.Rpi.SenseHat;
+using IoTHelloWorld;
 
 namespace RPi.SenseHat.Demo.Demos
 {

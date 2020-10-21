@@ -133,6 +133,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadAllSensors.cs" />
     <Compile Include="SenseHatDemo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -9,9 +9,13 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button Margin="50,50,0,0" x:Name="BtnHello" Content="TERVE!" VerticalAlignment="Top" Height="75" Width="308" FontSize="20" Click="BtnHello_Click"/>
-        <TextBlock Margin="150,150,0,0" x:Name="message"></TextBlock>
-        <Button Margin="393,50,0,0" x:Name="BtnSulje" Content="Sulje" VerticalAlignment="Top" Height="75" Width="308" FontSize="20" Click="BtnSulje_Click"/>
+        <Button Margin="50,50,0,0" x:Name="BtnHello" Content="TERVE!" VerticalAlignment="Top" Height="75" Width="212" FontSize="20" Click="BtnHello_Click"/>
+        <TextBlock Margin="50,264,0,0" x:Name="message"></TextBlock>
+        <Button Margin="1161,50,0,0" x:Name="BtnSulje" Content="Sulje" VerticalAlignment="Top" Height="75" Width="308" FontSize="20" Click="BtnSulje_Click"/>
+        <Button Margin="291,50,0,0" x:Name="BtnSenseDemo1" Content="Diskovalot" VerticalAlignment="Top" Height="75" Width="212" FontSize="20" Click="BtnSenseDemo1_Click"/>
+        <Button Margin="538,50,0,0" x:Name="BtnTextScroll" Content="Teksti" VerticalAlignment="Top" Height="75" Width="212" FontSize="20" Click="BtnTextScroll_Click"/>
+        <TextBox x:Name="TxtScroll" HorizontalAlignment="Left" Margin="538,154,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="372" Height="54" FontSize="18"/>
+        <Button Margin="779,50,0,0" x:Name="BtnSensorit" Content="Sensorointia" VerticalAlignment="Top" Height="75" Width="212" FontSize="20" Click="BtnSensorit_Click"/>
 
     </Grid>
 </Page>

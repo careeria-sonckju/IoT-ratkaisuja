@@ -26,6 +26,7 @@ using System.Linq;
 using Windows.UI;
 using Emmellsoft.IoT.Rpi.SenseHat;
 using Emmellsoft.IoT.Rpi.SenseHat.Sprites;
+using IoTHelloWorld;
 
 namespace RPi.SenseHat.Demo.Demos
 {
