@@ -223,6 +223,7 @@
       <LastGenOutput>IotDataModel.cs</LastGenOutput>
     </Content>
     <Content Include="Python\AZURE.py" />
+    <Content Include="Python\C02Monitor.py" />
     <Content Include="Python\GPIOAzure.py" />
     <Content Include="Python\humidity.py" />
     <Content Include="Python\sparkles.py" />

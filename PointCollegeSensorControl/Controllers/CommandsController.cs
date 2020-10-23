@@ -149,5 +149,20 @@ namespace CareeriaIOTSensorControl.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult CO2Monitor(int id)
+        {
+            var commands = from c in db.Commands
+                           where (c.DeviceId == id) && (c.Executed == false)
+                           select new Commands
+                           {
+                               Id_Command = c.Id_Command,
+                               Command = c.Command ?? "",
+                               DeviceId = c.DeviceId,
+                               Executed = c.Executed
+                           };
+
+            return Json(commands, JsonRequestBehavior.AllowGet);
+        }
     }
 }

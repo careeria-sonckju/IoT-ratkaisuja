@@ -1,6 +1,8 @@
-from gpiozero import LED
+﻿from gpiozero import LED
 from time import sleep
 import urllib.request
+import urllib2
+import json
 import RPi.GPIO as GPIO
 #GPIO-modulin asetukset
 GPIO.setmode(GPIO.BCM)
@@ -20,11 +22,13 @@ except :
     deviceid=1
 
 print("Käytän laitekoodia: " + str(deviceid))
+
 while True:
-    url = "http://careeriawebappiot.azurewebsites.net/commands/getcommand/"+str(deviceid)
-    print(url)
-    htmlfile = urllib.request.urlopen(url)
-    commandtext = str(htmlfile.read())
+    url = "http://careeriawebappiot.azurewebsites.net/commands/CO2Monitor/"+str(deviceid)
+    response = urllib2.urlopen(url)
+    data = json.load(response)
+    print(data)
+    commandtext=data.command
     if (commandtext.upper() == "B'ON'"):
         print("LED " + commandtext)
         GPIO.output(16,GPIO.HIGH) 
@@ -40,11 +44,7 @@ while True:
     else:
         print("Ei ajettavia komentoja")
     
-    print("LED2 on")
-    GPIO.output(20,GPIO.HIGH)   #taikka suoraan gpiozero-komento: led.on()
-    sleep(1)
-    GPIO.output(20,GPIO.LOW)  #taikka suoraan gpiozero-komento: led.off()
-    print("LED2 off")
+
     sleep(5)
 
 
