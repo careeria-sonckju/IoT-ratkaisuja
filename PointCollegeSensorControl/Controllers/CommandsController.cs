@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CareeriaIOTSensorControl.Models;
+using CareeriaIOTSensorControl.ViewModels;
 
 namespace CareeriaIOTSensorControl.Controllers
 {
@@ -154,15 +155,17 @@ namespace CareeriaIOTSensorControl.Controllers
         {
             var commands = from c in db.Commands
                            where (c.DeviceId == id) && (c.Executed == false)
-                           select new Commands
+                           select new DeviceCommands
                            {
                                Id_Command = c.Id_Command,
-                               Command = c.Command ?? "",
+                               Command = c.Command,
                                DeviceId = c.DeviceId,
                                Executed = c.Executed
                            };
 
+
             return Json(commands, JsonRequestBehavior.AllowGet);
+
         }
     }
 }
