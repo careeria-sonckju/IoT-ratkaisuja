@@ -222,6 +222,10 @@
       <DependentUpon>IotDataModel.edmx</DependentUpon>
       <LastGenOutput>IotDataModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Python\AZURE.py" />
+    <Content Include="Python\humidity.py" />
+    <Content Include="Python\sparkles.py" />
+    <Content Include="Python\temperature.py" />
     <Content Include="Python\temper_azure_python.py" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
