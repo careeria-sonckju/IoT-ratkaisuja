@@ -8,13 +8,17 @@ GPIO.setwarnings(False)
 GPIO.setup(20,GPIO.OUT)
 GPIO.setup(16,GPIO.OUT)
 # haetaan Raspberry-laitteen id-numero device.dat -nimisestä tiedostosta
-df = open("device.dat","r")
-deviceid = df.read()
-if (deviceid != ''):
-    print("Löysin laitekoodin tiedostosta")
-# ellei sitä löydy käytetään ohjelmaan kovakoodattua arvoa
-else:
+try:
+    df = open("device.dat","r")
+    deviceid = df.read()
+    if (deviceid != ''):
+        print("Löysin laitekoodin tiedostosta")
+    else:
+        deviceid=1
+except :
+    print("Laitekooditiedosto device.dat puuttuu, käytän kovakoodattua laiteid:tä")
     deviceid=1
+
 print("Käytän laitekoodia: " + deviceid)
 while True:
     url = "http://careeriawebappiot.azurewebsites.net/commands/getcommand/"+str(deviceid)
