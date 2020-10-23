@@ -19,19 +19,19 @@ except :
     print("Laitekooditiedosto device.dat puuttuu, käytän kovakoodattua laiteid:tä")
     deviceid=1
 
-print("Käytän laitekoodia: " + deviceid)
+print("Käytän laitekoodia: " + str(deviceid))
 while True:
     url = "http://careeriawebappiot.azurewebsites.net/commands/getcommand/"+str(deviceid)
     print(url)
     htmlfile = urllib.request.urlopen(url)
     commandtext = str(htmlfile.read())
-    if (commandtext == "b'on'"):
+    if (commandtext.upper() == "B'ON'"):
         print("LED " + commandtext)
         GPIO.output(16,GPIO.HIGH) 
         url = "http://careeriawebappiot.azurewebsites.net/commands/completed/"+str(deviceid)
         urllib.request.urlopen(url)
         print("Komento ON suoritettu.\r")
-    elif (commandtext == "b'off'"):
+    elif (commandtext.upper() == "B'OFF'"):
         print("LED " + commandtext)
         GPIO.output(16,GPIO.LOW) 
         url = "http://careeriawebappiot.azurewebsites.net/commands/completed/"+str(deviceid)
