@@ -153,6 +153,7 @@ namespace CareeriaIOTSensorControl.Controllers
 
         public ActionResult CO2Monitor(int id)
         {
+            //Haetaan tietokannasta laitekohtainen komento, jota ei ole vielä suoritettu
             var commands = from c in db.Commands
                            where (c.DeviceId == id) && (c.Executed == false)
                            select new DeviceCommands
@@ -163,8 +164,26 @@ namespace CareeriaIOTSensorControl.Controllers
                                Executed = c.Executed
                            };
 
+            //Jos kaikki komennot on suoritettu, luodaan tyhjä komento palautettavaksi
+            if (commands.Count() == 0)
+            {
+                List<DeviceCommands> cmdlst = new List<DeviceCommands>(); //Listarakennetta tarvitaan, jotta JSON muodostuu oikein hakasulkujen kanssa
+                DeviceCommands emptyCommand = new DeviceCommands() //Yksi omanlaisensa olio, joka viedään listalle
+                {
+                    Id_Command = 0,
+                    Command = "-",
+                    DeviceId = id,
+                    Executed = false
+                };
+                cmdlst.Add(emptyCommand); //Listalle vienti
 
-            return Json(commands, JsonRequestBehavior.AllowGet);
+                return Json(cmdlst, JsonRequestBehavior.AllowGet); //Lista muotoillaan JSON:ksi
+            } else
+            {
+                return Json(commands, JsonRequestBehavior.AllowGet);
+            }
+
+
 
         }
     }
