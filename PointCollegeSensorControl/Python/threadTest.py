@@ -19,6 +19,7 @@ def controlThings(stop0):
             urllib.request.urlopen(url)
             print("Komento Temp ON suoritettu.\r")
             thread2.start()
+            thread2.join()
         elif (commandtext.upper() == "B'TEMPOFF'"):
             print(commandtext)
             stop2.set()
@@ -55,7 +56,7 @@ if __name__ == '__main__':
     try:
         thread0.join()
         thread1.join()
-        thread2.join()
+        #thread2.join()
     except KeyboardInterrupt:
         print('catched KeyboardInterrupt')
         stop0.set()
