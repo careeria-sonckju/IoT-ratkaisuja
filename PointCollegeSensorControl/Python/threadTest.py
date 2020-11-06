@@ -1,7 +1,7 @@
 from threading import Thread, Event
 import urllib.request
 import time
-# muuta tähän oman Raspberry-laitteesi id-numero!
+# muuta tähän oman Raspberry-laitteesi id-numero, jotta tulokset kirjautuvat sinun nimiin tietokannassa!
 deviceid=1
 
 def controlThings(stop0):
