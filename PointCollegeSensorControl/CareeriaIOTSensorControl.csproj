@@ -215,6 +215,7 @@
       <DependentUpon>IotDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Python\pythonPoista.py" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\DeviceCommands.cs" />
   </ItemGroup>
