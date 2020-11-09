@@ -8,4 +8,4 @@ while True:
         print("Pressed")
     else:
         print("Released")
-    sleep(1)
+    sleep(10)
