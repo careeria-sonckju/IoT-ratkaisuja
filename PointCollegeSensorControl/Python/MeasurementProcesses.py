@@ -49,6 +49,9 @@ def pressure():
 
 
 def main():
+    p1 = Process(target=temperature, args=())
+    p2 = Process(target=humidity, args=())
+    p3 = Process(target=pressure, args=())
     while True:
         url = "http://careeriawebappiot.azurewebsites.net/commands/getcommand/"+str(deviceid)
         print(url)
@@ -56,7 +59,6 @@ def main():
         commandtext = str(htmlfile.read())
         if (commandtext.upper() == "B'TEMPON'"):
             print(commandtext)
-            p1 = Process(target=temperature, args=())
             p1.start()
             #p1.join()
             url = "http://careeriawebappiot.azurewebsites.net/commands/completed/"+str(deviceid)
@@ -71,7 +73,6 @@ def main():
             print("Komento Temp OFF suoritettu.\r")
         elif (commandtext.upper() == "B'HUMION'"):
             print(commandtext)
-            p2 = Process(target=humidity, args=())
             p2.start()
             #p2.join()
             url = "http://careeriawebappiot.azurewebsites.net/commands/completed/"+str(deviceid)
@@ -86,7 +87,6 @@ def main():
             print("Komento Humidity OFF suoritettu.\r")
         elif (commandtext.upper() == "B'MBARON'"):
             print(commandtext)
-            p3 = Process(target=pressure, args=())
             p3.start()
             #p3.join()
             url = "http://careeriawebappiot.azurewebsites.net/commands/completed/"+str(deviceid)
