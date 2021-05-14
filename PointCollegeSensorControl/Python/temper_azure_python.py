@@ -4,9 +4,7 @@ import urllib.request
 
 ap = SenseHat()
 
-
 while True:
-    
     temp = ap.get_temperature()-12
     print("Temp: %s C" % temp)
     url = "http://careeriawebappiot.azurewebsites.net/measurements/store/1?temp="+str(temp)
