@@ -7,7 +7,7 @@ white = (255, 255, 255)
 
 while True:
     pressure = sense.get_pressure()
-    pressure_value = 64 * pressure / 100
+    pressure_value = 64 * pressure / 10000
     print(pressure)
 
     pixels = [green if i < pressure_value else white for i in range(64)]
