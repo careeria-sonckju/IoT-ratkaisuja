@@ -1,7 +1,7 @@
 from threading import Thread, Event
 import urllib.request
 import time
-# muuta tähän oman Raspberry-laitteesi id-numero, jotta tulokset kirjautuvat sinun nimiin tietokannassa!
+# muuta tähän oman Raspberry-laitteesi id-numero!
 deviceid=1
 
 def controlThings(stop0):
@@ -19,7 +19,7 @@ def controlThings(stop0):
             urllib.request.urlopen(url)
             print("Komento Temp ON suoritettu.\r")
             thread2.start()
-            thread2.join()
+            thread2.join(2)
         elif (commandtext.upper() == "B'TEMPOFF'"):
             print(commandtext)
             stop2.set()

@@ -6,7 +6,7 @@ import threading
 ap = SenseHat()
 
 # muuta tähän oman Raspberry-laitteesi id-numero!
-deviceid=1
+deviceid=10
 
 temperatureInterval=2
 
