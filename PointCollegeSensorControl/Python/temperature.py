@@ -7,8 +7,9 @@ blue = (0, 0, 255)
 
 while True:
     temp = sense.temp
-    print(temp)
+    lampo = temp-15
+    print(lampo)
 
-    pixels = [red if i < temp else blue for i in range(64)]
+    pixels = [red if i < lampo else blue for i in range(64)]
 
     sense.set_pixels(pixels)

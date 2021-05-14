@@ -5,14 +5,14 @@ import urllib.request
 ap = SenseHat()
 
 # muuta tähän oman Raspberry-laitteesi id-numero!
-deviceid=1
+deviceid=10
 
 
 while True:
-    
+    type=1
     temp = ap.get_temperature()-12
-    print("Temp: %s C" % temp)
-    url = "http://careeriawebappiot.azurewebsites.net/measurements/store/"+str(deviceid)+"?temp="+str(temp)
+    print("Tempx: %s C" % temp)
+    url = "http://careeriawebappiot.azurewebsites.net/measurements/store/"+str(deviceid)+"?temp="+str(temp)+"&type="+str(type)
     print(url)
     htmlfile = urllib.request.urlopen(url)
     htmltext = htmlfile.read()
@@ -24,14 +24,14 @@ while True:
     commandtext = str(htmlfile.read())
     if (commandtext != "b''"):
         print(commandtext)
-        ap.set_rotation(180)
+        ap.set_rotation(270)
         ap.show_message("%s" % commandtext, scroll_speed=0.12, text_colour=[255, 20, 20])
         url = "http://careeriawebappiot.azurewebsites.net/commands/completed/"+str(deviceid)
         urllib.request.urlopen(url)
         print("Komento suoritettu.\r")
     else: print("Ei ajettavia komentoja")
     
-    ap.set_rotation(180)
+    ap.set_rotation(270)
     ap.show_message("%.1f C" % temp, scroll_speed=0.12, text_colour=[255, 255, 255])
-    time.sleep(5)
+    time.sleep(180)
 
