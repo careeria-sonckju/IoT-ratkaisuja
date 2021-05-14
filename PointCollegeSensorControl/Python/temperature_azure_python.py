@@ -1,7 +1,7 @@
 from sense_hat import SenseHat
 import time
 import urllib.request
-
+#Muutettu 14.5.2021 JSO
 sense = SenseHat()
 
 # muuta tähän oman Raspberry-laitteesi id-numero!
