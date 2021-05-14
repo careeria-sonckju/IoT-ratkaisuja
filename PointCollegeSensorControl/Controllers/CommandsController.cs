@@ -20,7 +20,6 @@ namespace CareeriaIOTSensorControl.Controllers
         {
             return View(db.Commands.ToList());
         }
-
         public string GetCommand(int id)
         {
             string command = (from c in db.Commands
@@ -30,7 +29,6 @@ namespace CareeriaIOTSensorControl.Controllers
                 command = "";
             return command;
         }
-
         public string Completed(int id)
         {
             Commands command = (from c in db.Commands
