@@ -2,6 +2,7 @@ from multiprocessing import Process
 from sense_hat import SenseHat
 import urllib.request
 import time
+#Testi
 #https://pymotw.com/2/multiprocessing/basics.html
 ap = SenseHat()
 # muuta tähän oman Raspberry-laitteesi id-numero!
