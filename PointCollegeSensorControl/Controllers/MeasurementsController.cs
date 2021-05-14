@@ -24,7 +24,6 @@ namespace CareeriaIOTSensorControl.Controllers
             DateTime localDate = DateTime.Now;
 
             m.value = double.Parse(value, en);
-            //m.time = DateTime.UtcNow(-2);
             m.time = localDate;
             m.type = type ?? 1; //jos mittauksen tyyppi on annettu, käytetään sitä, muuten oletetaan type=1 (lämpötila)
             db.measurements.Add(m);
