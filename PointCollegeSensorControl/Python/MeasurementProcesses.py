@@ -12,8 +12,12 @@ deviceid=9
 
 temperatureInterval=2
 
-def temperature():
+def temperature(q1):
     global temperatureInterval
+    #event = q1.get(block=True, timeout=timeout)
+    event = q1.get()
+    print("Queuen sisältöä ")
+    print(event)
     while True:
         type=1
         temp = ap.get_temperature()-12
@@ -49,12 +53,15 @@ def pressure():
         print("Ilmanpaine tallennettu: " + str(htmltext))
         time.sleep(3)
 def main():
-    p1 = Process(target=temperature, args=())
-#     p1.start()
-    p2 = Process(target=humidity, args=())
-#     p2.start()
-    p3 = Process(target=pressure, args=())
-#     p3.start()
+    queue1 = multiprocessing.Queue()
+    queue2 = multiprocessing.Queue()
+    queue3 = multiprocessing.Queue()
+    p1 = Process(target=temperature, args=(queue1,))
+    p1.start()
+    p2 = Process(target=humidity, args=(queue2,))
+    p2.start()
+    p3 = Process(target=pressure, args=(queue3,))
+    p3.start()
     while True:
         url = "http://careeriawebappiot.azurewebsites.net/commands/getcommand/"+str(deviceid)
         print(url)
@@ -62,7 +69,8 @@ def main():
         commandtext = str(htmlfile.read())
         if (commandtext.upper() == "B'TEMPON'"):
             print(commandtext)
-            p1.start()
+            queue1.put(commandtext)
+            #p1.start()
             #p1.join()
             url = "http://careeriawebappiot.azurewebsites.net/commands/completed/"+str(deviceid)
             urllib.request.urlopen(url)
