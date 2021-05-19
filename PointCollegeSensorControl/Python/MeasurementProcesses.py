@@ -3,6 +3,9 @@ from sense_hat import SenseHat
 import urllib.request
 import time
 #https://pymotw.com/2/multiprocessing/basics.html
+#https://stackoverflow.com/questions/11515944/how-to-use-multiprocessing-queue-in-python
+#https://betterprogramming.pub/introduction-to-message-queue-with-rabbitmq-python-639e397cb668
+
 ap = SenseHat()
 # muuta tähän oman Raspberry-laitteesi id-numero!
 deviceid=9
@@ -47,11 +50,11 @@ def pressure():
         time.sleep(3)
 def main():
     p1 = Process(target=temperature, args=())
-    p1.start()
+#     p1.start()
     p2 = Process(target=humidity, args=())
-    p2.start()
+#     p2.start()
     p3 = Process(target=pressure, args=())
-    p3.start()
+#     p3.start()
     while True:
         url = "http://careeriawebappiot.azurewebsites.net/commands/getcommand/"+str(deviceid)
         print(url)
@@ -59,8 +62,7 @@ def main():
         commandtext = str(htmlfile.read())
         if (commandtext.upper() == "B'TEMPON'"):
             print(commandtext)
-            if (not p1.is_alive()):
-                p1.start()
+            p1.start()
             #p1.join()
             url = "http://careeriawebappiot.azurewebsites.net/commands/completed/"+str(deviceid)
             urllib.request.urlopen(url)
