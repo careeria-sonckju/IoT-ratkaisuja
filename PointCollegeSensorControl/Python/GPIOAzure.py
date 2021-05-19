@@ -2,6 +2,7 @@ from gpiozero import LED
 from time import sleep
 import urllib.request
 import RPi.GPIO as GPIO
+#JSO 14.5.2021
 #GPIO-modulin asetukset
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -41,4 +42,3 @@ while True:
         print("Ei ajettavia komentoja")
     
     sleep(1)
-

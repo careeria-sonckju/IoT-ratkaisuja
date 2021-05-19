@@ -21,7 +21,7 @@ namespace CareeriaIOTSensorControl.Controllers
             measurements m = new measurements();
             m.sender = id;
             CultureInfo en = new CultureInfo("en-US");
-            DateTime localDate = DateTime.Now;
+            DateTime localDate = DateTime.Now.AddHours(3); //lisätään kellonaikaan jotain, jottei olisi UTC, vaan HKI
 
             m.value = double.Parse(value, en);
             m.time = localDate;
