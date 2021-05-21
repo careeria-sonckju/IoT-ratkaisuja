@@ -1,19 +1,19 @@
 from multiprocessing import Process
 import multiprocessing
-#from sense_hat import SenseHat
+from sense_hat import SenseHat
 import urllib.request
 import time
 #https://pymotw.com/2/multiprocessing/basics.html
 #https://stackoverflow.com/questions/11515944/how-to-use-multiprocessing-queue-in-python
 #https://betterprogramming.pub/introduction-to-message-queue-with-rabbitmq-python-639e397cb668
 
-#ap = SenseHat()
+ap = SenseHat()
 # muuta tähän oman Raspberry-laitteesi id-numero!
 deviceid=9
 
-temperatureInterval=2
-humidityInterval=2
-pressureInterval=2
+temperatureInterval=5
+humidityInterval=5
+pressureInterval=5
 
 def temperature(q1):
     while True:
@@ -23,8 +23,8 @@ def temperature(q1):
         if (event == "TEMPON"):
             print("Lämpötilamittaus / Queue 1 / on päällä ", event)
             type=1
-            #temp = ap.get_temperature()-12
             temp=21
+            temp = ap.get_temperature()-12
             print("Temp: %s C" % temp)
             url = "http://careeriawebappiot.azurewebsites.net/measurements/store/"+str(deviceid)+"?value="+str(temp)+"&type="+str(type)
             print(url)
@@ -43,8 +43,8 @@ def humidity(q2):
         if (event == "HUMION"):
             print("Kosteuden mittaus / Queue 2 / on päällä ", event)
             type=2
-            #humid = ap.get_humidity()
             humid=31
+            humid = ap.get_humidity()
             print("Humidity: %s RH" % humid)
             url = "http://careeriawebappiot.azurewebsites.net/measurements/store/"+str(deviceid)+"?value="+str(humid)+"&type="+str(type)
             print(url)
@@ -63,8 +63,8 @@ def pressure(q3):
         if (event == "MBARON"):
             print("Ilmanpaineen mittaus / Queue 3 / on päällä ", event)
             type=3
-            #mbars = ap.get_pressure()
             mbars=1001
+            mbars = ap.get_pressure()
             print("Pressure: %s mbar" % mbars)
             url = "http://careeriawebappiot.azurewebsites.net/measurements/store/"+str(deviceid)+"?value="+str(mbars)+"&type="+str(type)
             print(url)
@@ -74,22 +74,24 @@ def pressure(q3):
         elif (event == "MBAROFF"): 
             print("Ilmanpainetta ei mitata tällä hetkellä!")
         else: 
-            print("outo arvo ", event)
+            print("Jonon komento tällä hetkellä: ", event)
             
         time.sleep(pressureInterval)
 def main():
     queue1 = multiprocessing.Queue()
     queue2 = multiprocessing.Queue()
     queue3 = multiprocessing.Queue()
-    p1 = Process(target=temperature, args=(queue1,))
-    #p1.start()
-    p2 = Process(target=humidity, args=(queue2,))
-    #p2.start()
-    p3 = Process(target=pressure, args=(queue3,))
-    p3.start()
     queue1.put("initializing")
     queue2.put("initializing")
     queue3.put("initializing")
+    
+    p1 = Process(target=temperature, args=(queue1,))
+    p1.start()
+    p2 = Process(target=humidity, args=(queue2,))
+    p2.start()
+    p3 = Process(target=pressure, args=(queue3,))
+    p3.start()
+
     while True:
         url = "http://careeriawebappiot.azurewebsites.net/commands/getcommand/"+str(deviceid)
         print(url)
@@ -98,8 +100,6 @@ def main():
         if (commandtext.upper() == "B'TEMPON'"):
             print(commandtext)
             queue1.put("TEMPON")
-            #p1.start()
-            #p1.join()
             url = "http://careeriawebappiot.azurewebsites.net/commands/completed/"+str(deviceid)
             urllib.request.urlopen(url)
             print("Komento Temp ON suoritettu.\r")
@@ -112,7 +112,6 @@ def main():
         elif (commandtext.upper() == "B'HUMION'"):
             print(commandtext)
             queue2.put("HUMION")
-            #p2.join()
             url = "http://careeriawebappiot.azurewebsites.net/commands/completed/"+str(deviceid)
             urllib.request.urlopen(url)
             print("Komento Humidity ON suoritettu.\r")
@@ -125,7 +124,6 @@ def main():
         elif (commandtext.upper() == "B'MBARON'"):
             print(commandtext)
             queue3.put("MBARON")
-            #p3.join()
             url = "http://careeriawebappiot.azurewebsites.net/commands/completed/"+str(deviceid)
             urllib.request.urlopen(url)
             print("Komento Pressure ON suoritettu.\r")
@@ -136,7 +134,9 @@ def main():
             urllib.request.urlopen(url)
             print("Komento Pressure OFF suoritettu.\r")
         else:
-            print("Ei ajettavia komentoja, temperatureInterval="+str(temperatureInterval))
+            print("Ei ajettavia komentoja, ** temperatureInterval="+str(temperatureInterval)
+                  + " ** humidityInterval="+str(humidityInterval) 
+                  + " ** pressureInterval="+str(pressureInterval))
         time.sleep(3)
 
     print('finished main')
