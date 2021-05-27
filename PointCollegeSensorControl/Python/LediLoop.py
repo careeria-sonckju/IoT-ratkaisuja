@@ -1,7 +1,7 @@
 ﻿import RPi.GPIO as GPIO
 import time
 import threading
-Gled = 24 #vihreän ledin pinni on 24
+Gled = 17 #vihreän ledin pinni on 17
 MaxRounds=600
 
 GPIO.setmode(GPIO.BCM) #mitä pin-merkintäjärjestelmää käytetään BCM taikka BOARD https://raspberrypi.stackexchange.com/questions/12966/what-is-the-difference-between-board-and-bcm-for-gpio-pin-numbering
