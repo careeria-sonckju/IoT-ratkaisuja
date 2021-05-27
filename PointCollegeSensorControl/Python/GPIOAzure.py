@@ -2,12 +2,10 @@ from gpiozero import LED
 from time import sleep
 import urllib.request
 import RPi.GPIO as GPIO
-#JSO 14.5.2021
 #GPIO-modulin asetukset
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(20,GPIO.OUT)
-GPIO.setup(16,GPIO.OUT)
+GPIO.setup(17,GPIO.OUT)
 # haetaan Raspberry-laitteen id-numero device.dat -nimisestä tiedostosta
 try:
     df = open("device.dat","r")
@@ -28,13 +26,13 @@ while True:
     commandtext = str(htmlfile.read())
     if (commandtext.upper() == "B'LEDION'"):
         print("LED " + commandtext)
-        GPIO.output(16,GPIO.HIGH) 
+        GPIO.output(17,GPIO.HIGH) 
         url = "http://careeriawebappiot.azurewebsites.net/commands/completed/"+str(deviceid)
         urllib.request.urlopen(url)
         print("Komento LEDION suoritettu.\r")
     elif (commandtext.upper() == "B'LEDIOFF'"):
         print("LED " + commandtext)
-        GPIO.output(16,GPIO.LOW) 
+        GPIO.output(17,GPIO.LOW) 
         url = "http://careeriawebappiot.azurewebsites.net/commands/completed/"+str(deviceid)
         urllib.request.urlopen(url)
         print("Komento LEDIOFF suoritettu.\r")
@@ -42,3 +40,5 @@ while True:
         print("Ei ajettavia komentoja")
     
     sleep(1)
+
+
