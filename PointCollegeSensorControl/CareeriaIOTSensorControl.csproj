@@ -279,6 +279,7 @@
     <Content Include="Python\ProsessiEsimerkki2-ikisilmukka.py" />
     <Content Include="Python\temperature_azure_python.py" />
     <Content Include="Python\LediLoop.py" />
+    <Content Include="Python\buttonTest2.py" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
