@@ -1,21 +1,19 @@
-﻿import RPi.GPIO as GPIO # Import Raspberry Pi GPIO -kirjasto
+#import RPi.GPIO as GPIO # Import Raspberry Pi GPIO -kirjasto
 import time
-from gpiozero import PWMLED #mmm. Ledien kirkkautta voi säätää tällä kirjastolla
+from gpiozero import PWMLED, Button  #mmm. Ledien kirkkautta voi säätää tällä PWMLED kirjastolla
 
-Gled = PWMLED(17)
+Gled = PWMLED(17) #tämä siis GPIO17
 Rled = PWMLED(27)
 
-GPIO.setwarnings(False) #Ignoroidaan mahdolliset virheet
-GPIO.setmode(GPIO.BOARD) #Ei käytetä BCM-pinnijärjestystä, vaan fyysistä!
-GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #Asettaa pin10:n input pin:ksi ja asettaa alkuarvoksi = "pulled down" eli pois päältä
+button = Button(2) #tämä siis GPIO2
 
-while True: #ikiluuppi
-    if GPIO.input(10) == GPIO.HIGH:
-        print("Button was pressed!")
-        #GPIO.output(Gled,GPIO.HIGH) #HIGH tarkoittaa, että pinniin kytketään virta --> LEDI palaa
- 
-    else:
-        print("Button was NOT pressed!")
-        #GPIO.output(Gled,GPIO.LOW) #LOW tarkoittaa, ettei virtaa kytketä ko. pinniin
-        Gled.value = 1
+while True:
     time.sleep(1)
+    if button.is_pressed:
+        print("Pressed")
+        Gled.value = 1  #täydellä valoteholla
+    else:
+        print("Released")
+        Gled.value = 0.25  #neljännes valoteholla
+    time.sleep(1)
+    Gled.value = 0  #kokonaan pois
