@@ -2,11 +2,9 @@ from multiprocessing import Process
 from Bluetin_Echo import Echo
 import RPi.GPIO as GPIO
 import time
-
-TRIGGER_PIN = 23
-ECHO_PIN = 24
-
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM) #Käytetään BCM-mäppäystä pinnien hallintaan
+TRIGGER_PIN = 23 #Liipasimen BCM-pinni on 23
+ECHO_PIN = 24 #Äänen kaiun BCM-pinni on 24
 GPIO.setwarnings(False)
 def distanceMeasure():
     while True:
