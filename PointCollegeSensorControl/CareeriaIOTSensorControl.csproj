@@ -282,7 +282,6 @@
     <Content Include="Python\buttonTest2.py" />
     <Content Include="Python\buttonLedit.py" />
     <Content Include="Python\etaisyys.py" />
-    <Content Include="Python\etaisyysmittausKirjastonAvulla.py" />
     <Content Include="Python\EtäisyysMittausBluetin.py" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
