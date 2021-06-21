@@ -1,4 +1,4 @@
-﻿import RPi.GPIO as GPIO # Import Raspberry Pi GPIO -kirjasto
+import RPi.GPIO as GPIO # Import Raspberry Pi GPIO -kirjasto
 import time
 
 GPIO.setwarnings(False) #Ignoroidaan mahdolliset virheet

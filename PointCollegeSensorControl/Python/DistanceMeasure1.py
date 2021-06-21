@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from multiprocessing import Process
 import urllib.request
 import time
@@ -8,25 +9,28 @@ GPIO.setwarnings(False)
 # muuta tähän oman Raspberry-laitteesi id-numero!
 deviceid=9
 
-distanceLoopInterval=2
-sleeptime = 0.8
+distanceInterval=2
+sleeptime = 2
 #Sensorin ohjaus ja luenta-pinnit
 trigger_pin = 23
 echo_pin = 24
-
-
+etaisyys=0.0
 
 def distanceMeas():
-    global distanceLoopInterval
+    global distanceInterval
     while True:
         #Asetetaan GPIO:t
         GPIO.setup(trigger_pin, GPIO.OUT)
         GPIO.setup(echo_pin, GPIO.IN)
         GPIO.output(trigger_pin, False)
         type=98 #etäisyysmittauksen tyyppi Azure-tietokannassa on 98
-        Etaisyys = 2 #Etaisyys aluksi kovakoodattu kakkonen
+        #dist = 2 #aluksi kovakoodattu kakkonen
         print("Mitataan etäisyyttä sensorilla")
-        GPIO.output(trigger_pin, True) #etäisyysmittaus 10us pitkällä trigger signaalilla
+        # Annetaan sensorin asettuss
+        time.sleep(sleeptime)
+        
+        #etäisyysmittaus 10us pitkällä trigger signaalilla
+        GPIO.output(trigger_pin, True)
         time.sleep(0.00001)
         GPIO.output(trigger_pin, False)
 
@@ -36,15 +40,30 @@ def distanceMeas():
 
         while GPIO.input(echo_pin) == 1:
             SammutusAika = time.time()
+
         Kesto = SammutusAika - KaynnistysAika
-        Etaisyys = (Kesto * 34300) / 2  #etäisyyden laskenta (äänennopeus 34300 cm/s --> jaetaan kahdella, koska ääni menee edestakaisin
-        if Etaisyys < 2 or (round(Etaisyys) > 400): #Tarkistetaan, että tulos on mittausalueella
-            print("Mittausalueen ulkopuolella") # Virhe, jos tulos mittausalueen ulkopuolella
+
+        #etäisyyden laskenta
+        Etaisyys = (Kesto * 34300) / 2
+
+        # checking if value is within the possible distance
+        if Etaisyys < 2 or (round(Etaisyys) > 400):
+            # if not - print error
+
+            print("Mittausalueen ulkopuolella")
+
             print("------------------------------")
-        else: #muuten muotoillaan tulos
+
+        else:
+
+            #formating the result
             Etaisyys = format((Kesto * 34300) / 2, '.2f')
+            #Etaisyys = (Kesto * 34300) / 2
+
+            # printing the distance
             print("Etäisyys on ", Etaisyys," cm")
             print("------------------------------")
+
         # break between measurement
         time.sleep(sleeptime)
         
@@ -53,7 +72,8 @@ def distanceMeas():
         htmlfile = urllib.request.urlopen(url)
         htmltext = htmlfile.read()
         print("Etäisyysmittausarvo on tallennettu: " + str(htmltext))
-        time.sleep(distanceLoopInterval)        
+        time.sleep(distanceInterval)
+        #GPIO.cleanup()
 
 def main():
     while True:
@@ -78,7 +98,7 @@ def main():
             print("Komento Dist OFF suoritettu.\r")
         
         else:
-            print("Ei ajettavia komentoja, distanceLoopInterval="+str(distanceLoopInterval))
+            print("Ei ajettavia komentoja, distanceInterval="+str(distanceInterval))
         
         time.sleep(3)
 
