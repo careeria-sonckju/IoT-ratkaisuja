@@ -16,17 +16,16 @@ namespace CareeriaIOTSensorControl.Controllers
     {
         private IoTDBEntities db = new IoTDBEntities();
 
-        public String Store(int id, string temp)
+        public String Store(int id, string value, int? type)
         {
             measurements m = new measurements();
             m.sender = id;
             CultureInfo en = new CultureInfo("en-US");
-            DateTime localDate = DateTime.Now;
+            DateTime localDate = DateTime.Now.AddHours(3); //lisätään kellonaikaan jotain, jottei olisi UTC, vaan HKI
 
-            m.value = double.Parse(temp, en);
-            //m.time = DateTime.UtcNow(-2);
+            m.value = double.Parse(value, en);
             m.time = localDate;
-            m.type = 1;
+            m.type = type ?? 1; //jos mittauksen tyyppi on annettu, käytetään sitä, muuten oletetaan type=1 (lämpötila)
             db.measurements.Add(m);
             db.SaveChanges();
             return "ok";

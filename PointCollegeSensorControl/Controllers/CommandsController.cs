@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CareeriaIOTSensorControl.Models;
+using CareeriaIOTSensorControl.ViewModels;
 
 namespace CareeriaIOTSensorControl.Controllers
 {
@@ -19,7 +20,6 @@ namespace CareeriaIOTSensorControl.Controllers
         {
             return View(db.Commands.ToList());
         }
-
         public string GetCommand(int id)
         {
             string command = (from c in db.Commands
@@ -29,7 +29,6 @@ namespace CareeriaIOTSensorControl.Controllers
                 command = "";
             return command;
         }
-
         public string Completed(int id)
         {
             Commands command = (from c in db.Commands
@@ -148,6 +147,42 @@ namespace CareeriaIOTSensorControl.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult CO2Monitor(int id)
+        {
+            //Haetaan tietokannasta laitekohtainen komento, jota ei ole vielä suoritettu
+            var commands = from c in db.Commands
+                           where (c.DeviceId == id) && (c.Executed == false)
+                           select new DeviceCommands
+                           {
+                               Id_Command = c.Id_Command,
+                               Command = c.Command,
+                               DeviceId = c.DeviceId,
+                               Executed = c.Executed
+                           };
+
+            //Jos kaikki komennot on suoritettu, luodaan tyhjä komento palautettavaksi
+            if (commands.Count() == 0)
+            {
+                List<DeviceCommands> cmdlst = new List<DeviceCommands>(); //Listarakennetta tarvitaan, jotta JSON muodostuu oikein hakasulkujen kanssa
+                DeviceCommands emptyCommand = new DeviceCommands() //Yksi omanlaisensa olio, joka viedään listalle
+                {
+                    Id_Command = 0,
+                    Command = "-",
+                    DeviceId = id,
+                    Executed = false
+                };
+                cmdlst.Add(emptyCommand); //Listalle vienti
+
+                return Json(cmdlst, JsonRequestBehavior.AllowGet); //Lista muotoillaan JSON:ksi
+            } else
+            {
+                return Json(commands, JsonRequestBehavior.AllowGet);
+            }
+
+
+
         }
     }
 }
