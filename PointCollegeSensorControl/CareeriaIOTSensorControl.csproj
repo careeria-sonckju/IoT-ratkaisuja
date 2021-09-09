@@ -283,6 +283,12 @@
     <Content Include="Python\buttonLedit.py" />
     <Content Include="Python\etaisyys.py" />
     <Content Include="Python\EtäisyysMittausBluetin.py" />
+    <Content Include="Python\rfid\read.py" />
+    <Content Include="Python\rfid\readloop.py" />
+    <Content Include="Python\rfid\write.py" />
+    <Content Include="Python\rfid\writeloop.py" />
+    <Content Include="Python\EtaisyysMittausBluetin.py" />
+    <Content Include="Python\etaisyysMittausKirjastonAvulla.py" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
