@@ -14,7 +14,10 @@
 */
 .dl-horizontal dt {
     white-space: normal;
+    color: goldenrod;
 }
+
+
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
