@@ -2,14 +2,26 @@
 
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
+import urllib.request
+import json
 reader = SimpleMFRC522()
 lkm = 0
 Yled =31
+deviceid=9
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(Yled,GPIO.OUT)
 while True:    
     try:
+        url = "http://raspberrryiotserver.azurewebsites.net/RFIDTags"
+        response = urllib.request.urlopen(url)
+        print(response)
+        data = json.load(response)
+        print(data)
+        for uri in data:
+            print(uri)
+            break
+        
         lkm=lkm+1
         print('Please read the tag: ' + str(lkm))
         id, text = reader.read()
