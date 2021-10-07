@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+
 import RPi.GPIO as GPIO
 from mfrc522 import SimpleMFRC522
 GPIO.setwarnings(False)
